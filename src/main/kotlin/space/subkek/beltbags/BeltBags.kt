@@ -26,18 +26,17 @@ class BeltBags : JavaPlugin() {
     val BELT_BAG_RECIPE: Key = Key("beltbag_recipe")
 
     class TypedKey<P, C>(key: String, val dataType: PersistentDataType<P, C>) {
-      val key: NamespacedKey = NamespacedKey(plugin, key)
+      val key: NamespacedKey = NamespacedKey("etheriaextras", key)
     }
 
     class Key(key: String) {
-      val key: NamespacedKey = NamespacedKey(plugin, key)
+      val key: NamespacedKey = NamespacedKey("etheriaextras", key)
     }
   }
 
-  val database = Database("data");
+  lateinit var config: BBConfig private set
+  lateinit var database: Database private set
   val data = BBData();
-  lateinit var config: BBConfig
-    private set
 
   private fun registerEvents() {
     server.pluginManager.registerEvents(OpenListener(), this)
@@ -46,8 +45,10 @@ class BeltBags : JavaPlugin() {
   }
 
   override fun onEnable() {
-    database.createBeltBagTable()
     config = BBConfig.load(this)
+
+    database = Database("data")
+    database.createBeltBagTable()
 
     registerEvents()
     registerRecipe()
@@ -55,6 +56,10 @@ class BeltBags : JavaPlugin() {
 
   override fun onDisable() {
     unregisterRecipe()
+
+    if (::database.isInitialized) {
+      database.close()
+    }
   }
 
   private fun registerRecipe() {

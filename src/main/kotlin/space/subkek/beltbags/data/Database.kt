@@ -9,7 +9,7 @@ import java.nio.file.Path
 import java.sql.*
 import java.util.*
 
-class Database(private var path: String) : AutoCloseable {
+class Database(private var path: String) {
   private val connection: Connection
 
   init {
@@ -19,7 +19,8 @@ class Database(private var path: String) : AutoCloseable {
   }
 
   @Throws(SQLException::class)
-  override fun close() {
+  fun close() {
+    connection.commit()
     connection.close()
   }
 

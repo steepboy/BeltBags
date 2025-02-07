@@ -76,5 +76,4 @@ tasks.shadowJar {
   fun relocate(pkg: String) = relocate(pkg, "space.subkek.beltbags.libs.$pkg")
 
   relocate("space.subkek.sklib")
-  relocate("org.h2")
 }

@@ -31,7 +31,10 @@ class AnvilListener : Listener {
     val firstItemClone = firstItem.clone()
     val itemMeta = firstItemClone.itemMeta
 
-    itemMeta.displayName(Component.text("${anvilView.renameText}"))
+    anvilView.renameText?.let {
+      if (it.isBlank()) return@let
+      itemMeta.customName(Component.text(it))
+    }
 
     var oldLore = itemMeta.lore()
     if (oldLore == null) oldLore = ArrayList()
