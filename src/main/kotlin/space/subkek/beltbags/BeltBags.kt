@@ -1,7 +1,6 @@
 package space.subkek.beltbags
 
 import dev.jorel.commandapi.CommandAPICommand
-import dev.jorel.commandapi.executors.PlayerCommandExecutor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
@@ -9,6 +8,7 @@ import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.plugin.java.JavaPlugin
 import org.slf4j.Logger
+
 import space.subkek.beltbags.commands.OpenCommand
 import space.subkek.beltbags.data.BBConfig
 import space.subkek.beltbags.data.BBData
@@ -69,9 +69,7 @@ class BeltBags : JavaPlugin() {
   private fun registerCommands() {
     CommandAPICommand("beltbags")
       .withAliases("bb")
-      .executesPlayer(PlayerCommandExecutor { player, _ ->
-        OpenCommand().execute(player)
-      })
+      .executesPlayer(OpenCommand()::execute)
       .register()
   }
 
