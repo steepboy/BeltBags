@@ -8,6 +8,8 @@ enum class BBLanguage(private val content: String) {
   // #TODO Make multi-language support without changing something else
   PREFIX("<#ff5e45>BeltBags » <#ff8c00> "),
   NO_PERMISSION("<red>У вас нет прав на использование команды."),
+  NO_LEGGINGS("<red>На вас нет штанов!"),
+  NO_BELT_BAG_LEGGINGS("<red>На ваших штанах нет поясной сумки"),
   INVENTORY_NAME("Поясная сумка"),
   LEGGINGS_LORE("<italic:false><gold>▷<gray> Поясная сумка</reset>"),
   BELT_BAG_ITEM_NAME("<light_purple>Поясная сумка");
