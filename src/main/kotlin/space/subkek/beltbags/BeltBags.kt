@@ -39,7 +39,7 @@ class BeltBags : JavaPlugin() {
 
   lateinit var config: BBConfig private set
   lateinit var database: Database private set
-  val data = BBData();
+  val data = BBData()
 
   private fun registerEvents() {
     server.pluginManager.registerEvents(OpenListener(), this)
@@ -69,7 +69,7 @@ class BeltBags : JavaPlugin() {
   private fun registerCommands() {
     CommandAPICommand("beltbags")
       .withAliases("bb")
-      .executesPlayer(OpenCommand()::execute)
+      .withSubcommand(OpenCommand())
       .register()
   }
 
