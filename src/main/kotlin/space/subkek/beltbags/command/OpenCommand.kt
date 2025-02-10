@@ -1,4 +1,4 @@
-package space.subkek.beltbags.commands
+package space.subkek.beltbags.command
 
 import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.executors.CommandArguments
