@@ -11,7 +11,7 @@ import space.subkek.beltbags.BeltBags
 
 class CloseListener : Listener {
   @EventHandler
-  fun on(event: InventoryCloseEvent) {
+  private fun on(event: InventoryCloseEvent) {
     val player = event.player
     if (player !is Player) return
     val beltBagInv = event.inventory.holder

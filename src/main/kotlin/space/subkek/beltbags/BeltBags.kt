@@ -8,7 +8,6 @@ import org.bukkit.inventory.ShapedRecipe
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.plugin.java.JavaPlugin
 import org.slf4j.Logger
-
 import space.subkek.beltbags.command.OpenCommand
 import space.subkek.beltbags.data.BBConfig
 import space.subkek.beltbags.data.BBData

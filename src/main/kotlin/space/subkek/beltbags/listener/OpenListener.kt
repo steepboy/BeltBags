@@ -13,7 +13,7 @@ import java.util.*
 
 class OpenListener : Listener {
   @EventHandler
-  fun on(event: InventoryClickEvent) {
+  private fun on(event: InventoryClickEvent) {
     val player = event.whoClicked
     if (player !is Player) return
 

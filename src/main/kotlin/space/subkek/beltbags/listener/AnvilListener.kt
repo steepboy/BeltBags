@@ -12,20 +12,18 @@ import java.util.*
 @Suppress("UnstableApiUsage")
 class AnvilListener : Listener {
   @EventHandler
-  fun on(event: PrepareAnvilEvent) {
+  private fun on(event: PrepareAnvilEvent) {
     val anvilView = event.view
+    val firstItem = anvilView.getItem(0)?:return
+    val secondItem = anvilView.getItem(1)?:return
 
-    val firstItem = anvilView.getItem(0)
-    val secondItem = anvilView.getItem(1)
-
-    if (firstItem == null || secondItem == null) return
     if (firstItem.type != Material.NETHERITE_LEGGINGS) return
-    val firstItemData = firstItem.itemMeta.persistentDataContainer
+    val firstItemData = firstItem.persistentDataContainer
     if (firstItemData.has(BeltBags.Keys.BELT_BAG_INV.key)) return
+
     if (secondItem.type != BeltBags.plugin.config.beltBagItemMaterial) return
     if (secondItem.amount > 1) return
-    if (!secondItem.hasItemMeta()) return
-    val secondItemData = secondItem.itemMeta.persistentDataContainer
+    val secondItemData = secondItem.persistentDataContainer
     if (!secondItemData.has(BeltBags.Keys.BELT_BAG_ITEM.key)) return
 
     val firstItemClone = firstItem.clone()
@@ -40,7 +38,6 @@ class AnvilListener : Listener {
     if (oldLore == null) oldLore = ArrayList()
     oldLore.add(BBLanguage.LEGGINGS_LORE.component())
     itemMeta.lore(oldLore)
-
     itemMeta.setCustomModelData(BeltBags.plugin.config.texture.leggingsCustomModelData)
 
     itemMeta.persistentDataContainer.set(
