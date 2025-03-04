@@ -15,7 +15,7 @@ class BreakListener : Listener {
     val leggings = event.brokenItem
     if (leggings.type != Material.NETHERITE_LEGGINGS) return
 
-    val data = leggings.itemMeta.persistentDataContainer
+    val data = leggings.persistentDataContainer
     val stringUUID = data.get(BeltBags.Keys.BELT_BAG_INV.key, BeltBags.Keys.BELT_BAG_INV.dataType) ?: return
     val uuid = UUID.fromString(stringUUID)
 

@@ -26,7 +26,7 @@ class OpenListener : Listener {
     val item = event.currentItem ?: return
     if (item.type != Material.NETHERITE_LEGGINGS) return
 
-    val data = item.itemMeta.persistentDataContainer
+    val data = item.persistentDataContainer
 
     val stringUUID = data.get(BeltBags.Keys.BELT_BAG_INV.key, BeltBags.Keys.BELT_BAG_INV.dataType) ?: return
     val uuid = UUID.fromString(stringUUID)

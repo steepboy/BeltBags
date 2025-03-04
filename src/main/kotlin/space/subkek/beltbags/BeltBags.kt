@@ -71,6 +71,7 @@ class BeltBags : JavaPlugin() {
     CommandAPICommand("beltbags")
       .withAliases("bb")
       .withSubcommand(OpenCommand())
+      .executesPlayer(OpenCommand::execute)
       .register()
   }
 
