@@ -13,6 +13,7 @@ import space.subkek.beltbags.data.BBConfig
 import space.subkek.beltbags.data.BBData
 import space.subkek.beltbags.data.Database
 import space.subkek.beltbags.listener.AnvilListener
+import space.subkek.beltbags.listener.BreakListener
 import space.subkek.beltbags.listener.CloseListener
 import space.subkek.beltbags.listener.OpenListener
 
@@ -44,6 +45,7 @@ class BeltBags : JavaPlugin() {
     server.pluginManager.registerEvents(OpenListener(), this)
     server.pluginManager.registerEvents(CloseListener(), this)
     server.pluginManager.registerEvents(AnvilListener(), this)
+    server.pluginManager.registerEvents(BreakListener(), this)
   }
 
   override fun onEnable() {

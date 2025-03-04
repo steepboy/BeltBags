@@ -23,11 +23,11 @@ class CloseListener : Listener {
         val item = inv.getItem(i) ?: continue
         if (item.type == Material.NETHERITE_LEGGINGS) {
           if (!item.persistentDataContainer.has(BeltBags.Keys.BELT_BAG_INV.key)) continue
-          player.getWorld().dropItemNaturally(player.getLocation().add(BlockFace.UP.direction), item)
+          player.world.dropItemNaturally(player.location.add(BlockFace.UP.direction), item)
           inv.setItem(i, null)
         }
         if (item.type.name.contains("BUNDLE") || item.type.name.contains("SHULKER_BOX")) {
-          player.getWorld().dropItemNaturally(player.getLocation().add(BlockFace.UP.direction), item)
+          player.world.dropItemNaturally(player.location.add(BlockFace.UP.direction), item)
           inv.setItem(i, null)
         }
       }

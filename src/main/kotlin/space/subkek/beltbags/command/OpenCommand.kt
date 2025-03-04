@@ -20,6 +20,7 @@ class OpenCommand : CommandAPICommand("open") {
       player.sendMessage(BBLanguage.NO_LEGGINGS.pComponent())
       return
     }
+
     if (leggings.type != Material.NETHERITE_LEGGINGS) {
       player.sendMessage(BBLanguage.NO_BELT_BAG_LEGGINGS.pComponent())
       return

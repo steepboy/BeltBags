@@ -32,6 +32,7 @@ dependencies {
 
   shadow("space.subkek:sklib:1.0.0")
   shadow("com.h2database:h2:2.3.232")
+  shadow("com.j256.ormlite:ormlite-jdbc:6.1")
 
   compileOnly("dev.jorel:commandapi-bukkit-core:9.7.0")
 }
