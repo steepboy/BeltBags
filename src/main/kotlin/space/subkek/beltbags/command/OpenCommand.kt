@@ -20,7 +20,7 @@ class OpenCommand : CommandAPICommand("open") {
       player.sendMessage(BBLanguage.NO_LEGGINGS.pComponent())
       return
     }
-    if (leggings.type != Material.NETHERITE_LEGGINGS) {
+    if (leggings.type == Material.LEATHER_LEGGINGS) {
       player.sendMessage(BBLanguage.NO_BELT_BAG_LEGGINGS.pComponent())
       return
     }
@@ -32,7 +32,7 @@ class OpenCommand : CommandAPICommand("open") {
     }
     val uuid = UUID.fromString(stringUUID)
 
-    val inv = BeltBags.plugin.data.getBeltBagInventory(uuid)
+    val inv = BeltBags.plugin.data.getBeltBagInventory(uuid, player)
     player.scheduler.runDelayed(BeltBags.plugin, { player.openInventory(inv.inv) }, null, 1)
   }
 }

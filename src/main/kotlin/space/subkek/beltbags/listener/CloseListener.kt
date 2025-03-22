@@ -21,7 +21,7 @@ class CloseListener : Listener {
       val inv = beltBagInv.inv
       for (i in 0 until inv.size) {
         val item = inv.getItem(i) ?: continue
-        if (item.type == Material.NETHERITE_LEGGINGS) {
+        if (item.type != Material.LEATHER_LEGGINGS) {
           if (!item.persistentDataContainer.has(BeltBags.Keys.BELT_BAG_INV.key)) continue
           player.getWorld().dropItemNaturally(player.getLocation().add(BlockFace.UP.direction), item)
           inv.setItem(i, null)

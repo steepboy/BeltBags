@@ -19,7 +19,7 @@ class AnvilListener : Listener {
     val secondItem = anvilView.getItem(1)
 
     if (firstItem == null || secondItem == null) return
-    if (firstItem.type != Material.NETHERITE_LEGGINGS) return
+    if (firstItem.type == Material.LEATHER_LEGGINGS) return
     val firstItemData = firstItem.itemMeta.persistentDataContainer
     if (firstItemData.has(BeltBags.Keys.BELT_BAG_INV.key)) return
     if (secondItem.type != BeltBags.plugin.config.beltBagItemMaterial) return

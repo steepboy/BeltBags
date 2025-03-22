@@ -24,7 +24,7 @@ class OpenListener : Listener {
     if (clickedInv !== player.inventory) return
 
     val item = event.currentItem ?: return
-    if (item.type != Material.NETHERITE_LEGGINGS) return
+    if (item.type == Material.LEATHER_LEGGINGS) return
 
     val data = item.itemMeta.persistentDataContainer
 
@@ -33,7 +33,7 @@ class OpenListener : Listener {
 
     event.isCancelled = true
 
-    val inv: BeltBagInventory = BeltBags.plugin.data.getBeltBagInventory(uuid)
+    val inv: BeltBagInventory = BeltBags.plugin.data.getBeltBagInventory(uuid, player)
 
     // Open Inventory to player
     // One tick delay is necessary to prevent client issues
