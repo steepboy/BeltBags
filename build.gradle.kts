@@ -34,7 +34,7 @@ dependencies {
   shadow("com.h2database:h2:2.3.232")
   shadow("com.j256.ormlite:ormlite-jdbc:6.1")
 
-  compileOnly("dev.jorel:commandapi-bukkit-core:9.7.0")
+  shadow("dev.jorel:commandapi-bukkit-shade:9.7.0")
 }
 
 bukkit {
@@ -53,8 +53,7 @@ bukkit {
   foliaSupported = true
 
   depend = listOf(
-    "MCKotlin",
-    "CommandAPI"
+    "MCKotlin"
   )
 
   permissions {
@@ -77,4 +76,5 @@ tasks.shadowJar {
   fun relocate(pkg: String) = relocate(pkg, "space.subkek.beltbags.libs.$pkg")
 
   relocate("space.subkek.sklib")
+  relocate("dev.jorel")
 }

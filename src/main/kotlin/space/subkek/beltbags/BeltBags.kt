@@ -1,6 +1,7 @@
 package space.subkek.beltbags
 
 import dev.jorel.commandapi.CommandAPI
+import dev.jorel.commandapi.CommandAPIBukkitConfig
 import dev.jorel.commandapi.CommandAPICommand
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -50,7 +51,13 @@ class BeltBags : JavaPlugin() {
     server.pluginManager.registerEvents(BreakListener(), this)
   }
 
+  override fun onLoad() {
+    CommandAPI.onLoad(CommandAPIBukkitConfig(this).silentLogs(true).skipReloadDatapacks(true))
+  }
+
   override fun onEnable() {
+    CommandAPI.onEnable()
+
     config = BBConfig.load(this)
 
     database = Database("data")
@@ -62,6 +69,8 @@ class BeltBags : JavaPlugin() {
   }
 
   override fun onDisable() {
+    CommandAPI.onDisable()
+
     unregisterCommands()
     unregisterRecipe()
 
