@@ -85,4 +85,18 @@ class Database(private var path: String) {
       statement.executeBatch()
     }
   }
+
+  @Throws(SQLException::class)
+  fun getAllBeltBagIds(): List<UUID> {
+    val statement = connection.createStatement()
+    val resultSet = statement.executeQuery("SELECT DISTINCT id FROM belt_bags")
+
+    val result: MutableList<UUID> = ArrayList()
+    while (resultSet.next()) {
+      val uuid = resultSet.getObject("id", UUID::class.java)
+      result.add(uuid)
+    }
+
+    return result
+  }
 }

@@ -1,5 +1,6 @@
 package space.subkek.beltbags.listener
 
+import io.papermc.paper.event.block.DragonEggFormEvent
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
