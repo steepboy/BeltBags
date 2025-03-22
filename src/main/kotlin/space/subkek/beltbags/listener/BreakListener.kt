@@ -1,6 +1,5 @@
 package space.subkek.beltbags.listener
 
-import org.bukkit.Material
 import org.bukkit.block.BlockFace
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -13,13 +12,12 @@ class BreakListener : Listener {
   @EventHandler
   private fun on(event: PlayerItemBreakEvent) {
     val leggings = event.brokenItem
-    if (leggings.type != Material.NETHERITE_LEGGINGS) return
 
     val data = leggings.persistentDataContainer
     val stringUUID = data.get(BeltBags.Keys.BELT_BAG_INV.key, BeltBags.Keys.BELT_BAG_INV.dataType) ?: return
     val uuid = UUID.fromString(stringUUID)
 
-    val holder: BeltBagInventory = BeltBags.plugin.data.getBeltBagInventory(uuid)
+    val holder: BeltBagInventory = BeltBags.plugin.data.getBeltBagInventory(uuid, leggings.type, event.player.location)
 
     val inv = holder.inventory
     val player = event.player

@@ -1,12 +1,11 @@
 package space.subkek.beltbags.listener
 
-import io.papermc.paper.event.block.DragonEggFormEvent
 import net.kyori.adventure.text.Component
-import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.PrepareAnvilEvent
 import space.subkek.beltbags.BBLanguage
+import space.subkek.beltbags.BeltBagInventory
 import space.subkek.beltbags.BeltBags
 import java.util.*
 
@@ -15,10 +14,10 @@ class AnvilListener : Listener {
   @EventHandler
   private fun on(event: PrepareAnvilEvent) {
     val anvilView = event.view
-    val firstItem = anvilView.getItem(0)?:return
-    val secondItem = anvilView.getItem(1)?:return
+    val firstItem = anvilView.getItem(0) ?: return
+    val secondItem = anvilView.getItem(1) ?: return
 
-    if (firstItem.type != Material.NETHERITE_LEGGINGS) return
+    if (!BeltBagInventory.canCreate(firstItem.type)) return
     val firstItemData = firstItem.persistentDataContainer
     if (firstItemData.has(BeltBags.Keys.BELT_BAG_INV.key)) return
 

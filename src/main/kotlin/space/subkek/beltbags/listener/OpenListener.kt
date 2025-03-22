@@ -1,6 +1,5 @@
 package space.subkek.beltbags.listener
 
-import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -24,8 +23,6 @@ class OpenListener : Listener {
     if (clickedInv !== player.inventory) return
 
     val item = event.currentItem ?: return
-    if (item.type != Material.NETHERITE_LEGGINGS) return
-
     val data = item.persistentDataContainer
 
     val stringUUID = data.get(BeltBags.Keys.BELT_BAG_INV.key, BeltBags.Keys.BELT_BAG_INV.dataType) ?: return
@@ -33,10 +30,7 @@ class OpenListener : Listener {
 
     event.isCancelled = true
 
-    val inv: BeltBagInventory = BeltBags.plugin.data.getBeltBagInventory(uuid)
-
-    // Open Inventory to player
-    // One tick delay is necessary to prevent client issues
+    val inv: BeltBagInventory = BeltBags.plugin.data.getBeltBagInventory(uuid, item.type, player.location)
     player.getScheduler().runDelayed(BeltBags.plugin, { player.openInventory(inv.inv) }, null, 1)
   }
 }
