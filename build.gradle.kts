@@ -4,7 +4,6 @@ plugins {
   id("java")
   id("net.minecrell.plugin-yml.bukkit") version "0.6.0"
   id("com.gradleup.shadow") version "9.0.0-beta4"
-  id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
   kotlin("jvm")
 }
 
@@ -26,7 +25,7 @@ repositories {
 }
 
 dependencies {
-  paperweight.devBundle(group = "space.subkek.etheria", version = "1.21.4-R0.1-SNAPSHOT")
+  compileOnly("space.subkek.etheria:etheria-api:1.21.4-R0.1-SNAPSHOT")
 
   compileOnly(kotlin("stdlib"))
 
@@ -76,5 +75,5 @@ tasks.shadowJar {
   fun relocate(pkg: String) = relocate(pkg, "space.subkek.beltbags.libs.$pkg")
 
   relocate("space.subkek.sklib")
-  relocate("dev.jorel")
+  relocate("dev.jorel.commandapi")
 }

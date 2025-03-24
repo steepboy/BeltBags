@@ -22,7 +22,6 @@ class AnvilListener : Listener {
     if (firstItemData.has(BeltBags.Keys.BELT_BAG_INV.key)) return
 
     if (secondItem.type != BeltBags.plugin.config.beltBagItemMaterial) return
-    if (secondItem.amount > 1) return
     val secondItemData = secondItem.persistentDataContainer
     if (!secondItemData.has(BeltBags.Keys.BELT_BAG_ITEM.key)) return
 
@@ -45,6 +44,7 @@ class AnvilListener : Listener {
     )
     firstItemClone.setItemMeta(itemMeta)
 
+    anvilView.repairItemCountCost = 1
     anvilView.repairCost = 20
 
     event.result = firstItemClone

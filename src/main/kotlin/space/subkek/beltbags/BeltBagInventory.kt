@@ -14,8 +14,9 @@ class BeltBagInventory(val uuid: UUID, private val type: Material) : InventoryHo
 
     companion object {
       fun getSizeByType(type: Material): Optional<Int> {
-        for (sizeClass in InventorySize.entries) {
-          if (type in sizeClass.types) {
+        for (sizeClass in entries) {
+          if (sizeClass.types.contains(type)) {
+            BeltBags.logger.error("Size: ${sizeClass.size}; Types: ${sizeClass.types}")
             return Optional.of(sizeClass.size)
           }
         }

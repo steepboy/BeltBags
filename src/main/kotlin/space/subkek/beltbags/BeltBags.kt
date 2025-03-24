@@ -69,14 +69,14 @@ class BeltBags : JavaPlugin() {
   }
 
   override fun onDisable() {
-    CommandAPI.onDisable()
-
-    unregisterCommands()
-    unregisterRecipe()
-
     if (::database.isInitialized) {
       database.close()
     }
+
+    unregisterCommands()
+    CommandAPI.onDisable()
+
+    unregisterRecipe()
   }
 
   private fun registerCommands() {
@@ -85,11 +85,17 @@ class BeltBags : JavaPlugin() {
       .withSubcommand(OpenCommand(this))
       .withSubcommand(IdCommand())
       .executesPlayer(OpenCommand::execute)
-      .register()
+      .register("beltbags")
   }
 
   private fun unregisterCommands() {
-    CommandAPI.unregister("beltbags", true)
+    CommandAPI.getRegisteredCommands().forEach { command ->
+      CommandAPI.unregister(command.commandName)
+
+      command.aliases.forEach {
+        CommandAPI.unregister(it)
+      }
+    }
   }
 
   private fun registerRecipe() {

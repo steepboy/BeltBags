@@ -33,9 +33,6 @@ class CloseListener : Listener {
 
     beltBagInv.save()
     if (beltBagInv.adminCreated) {
-      beltBagInv.inv.viewers.forEach {
-        it.closeInventory()
-      }
       BeltBags.plugin.data.removeBeltBagInventory(beltBagInv.uuid)
     }
   }
