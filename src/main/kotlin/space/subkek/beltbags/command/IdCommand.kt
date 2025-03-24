@@ -5,7 +5,7 @@ import dev.jorel.commandapi.executors.CommandArguments
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import space.subkek.beltbags.BBLanguage
-import space.subkek.beltbags.BeltBags
+import space.subkek.beltbags.util.BBUtil
 import java.util.*
 
 class IdCommand : CommandAPICommand("id") {
@@ -13,10 +13,9 @@ class IdCommand : CommandAPICommand("id") {
     this.executesPlayer(this::execute)
   }
 
-  private fun getBeltBagUuid(itemStack: ItemStack?): UUID? {
-    return itemStack?.persistentDataContainer
-      ?.get(BeltBags.Keys.BELT_BAG_INV.key, BeltBags.Keys.BELT_BAG_INV.dataType)
-      ?.let(UUID::fromString)
+  private fun getBeltBagUuid(item: ItemStack?): UUID? {
+    item ?: return null
+    return BBUtil.getUUID(item)
   }
 
   private fun hasBeltBag(itemStack: ItemStack?): Boolean {
