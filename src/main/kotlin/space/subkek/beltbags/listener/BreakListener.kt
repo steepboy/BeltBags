@@ -6,17 +6,14 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerItemBreakEvent
 import space.subkek.beltbags.BeltBagInventory
 import space.subkek.beltbags.BeltBags
+import space.subkek.beltbags.util.BBUtil
 import java.util.*
 
 class BreakListener : Listener {
   @EventHandler
   private fun on(event: PlayerItemBreakEvent) {
     val leggings = event.brokenItem
-
-    val data = leggings.persistentDataContainer
-    val stringUUID = data.get(BeltBags.Keys.BELT_BAG_INV.key, BeltBags.Keys.BELT_BAG_INV.dataType) ?: return
-    val uuid = UUID.fromString(stringUUID)
-
+    val uuid = BBUtil.getUUID(leggings) ?: return
     val holder: BeltBagInventory = BeltBags.plugin.data.getBeltBagInventory(uuid, leggings.type, event.player.location)
 
     val inv = holder.inventory

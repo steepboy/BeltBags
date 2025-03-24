@@ -4,10 +4,12 @@ import dev.jorel.commandapi.CommandAPICommand
 import dev.jorel.commandapi.arguments.ArgumentSuggestions
 import dev.jorel.commandapi.arguments.UUIDArgument
 import dev.jorel.commandapi.executors.CommandArguments
-import org.bukkit.Material
+import org.bukkit.*
 import org.bukkit.entity.Player
 import space.subkek.beltbags.BBLanguage
 import space.subkek.beltbags.BeltBags
+import space.subkek.beltbags.util.BBUtil
+import space.subkek.beltbags.util.LegacyUtil
 import java.util.*
 
 class OpenCommand(plugin: BeltBags) : CommandAPICommand("open") {
@@ -33,14 +35,13 @@ class OpenCommand(plugin: BeltBags) : CommandAPICommand("open") {
           player.sendMessage(BBLanguage.NO_LEGGINGS.pComponent())
           return
         }
-        type = leggings.type
 
-        val data = leggings.persistentDataContainer
-        val stringUUID = data.get(BeltBags.Keys.BELT_BAG_INV.key, BeltBags.Keys.BELT_BAG_INV.dataType) ?: run {
+        type = leggings.type
+        uuid = BBUtil.getUUID(leggings) ?: run {
           player.sendMessage(BBLanguage.NO_EQUIP_BELT_BAG.pComponent())
           return
         }
-        uuid = UUID.fromString(stringUUID)
+
       } else {
         if (!BeltBags.plugin.database.getAllBeltBagIds().contains(uuid)) {
           player.sendMessage(BBLanguage.BELT_BAG_NOT_EXISTS.pComponent())
@@ -50,9 +51,9 @@ class OpenCommand(plugin: BeltBags) : CommandAPICommand("open") {
         adminCreated = true
       }
 
-      val inv = BeltBags.plugin.data.getBeltBagInventory(uuid!!, type, player.location)
-      inv.adminCreated = adminCreated
-      player.scheduler.runDelayed(BeltBags.plugin, { player.openInventory(inv.inv) }, null, 1)
+      BBUtil.open(uuid, player, type) {
+        it.adminCreated = adminCreated
+      }
     }
   }
 }

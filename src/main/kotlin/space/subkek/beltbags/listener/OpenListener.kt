@@ -6,9 +6,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryType
-import space.subkek.beltbags.BeltBagInventory
-import space.subkek.beltbags.BeltBags
-import java.util.*
+import space.subkek.beltbags.util.BBUtil
 
 class OpenListener : Listener {
   @EventHandler
@@ -23,14 +21,10 @@ class OpenListener : Listener {
     if (clickedInv !== player.inventory) return
 
     val item = event.currentItem ?: return
-    val data = item.persistentDataContainer
+    val uuid = BBUtil.getUUID(item) ?: return
 
-    val stringUUID = data.get(BeltBags.Keys.BELT_BAG_INV.key, BeltBags.Keys.BELT_BAG_INV.dataType) ?: return
-    val uuid = UUID.fromString(stringUUID)
+    BBUtil.open(uuid, player, item.type)
 
     event.isCancelled = true
-
-    val inv: BeltBagInventory = BeltBags.plugin.data.getBeltBagInventory(uuid, item.type, player.location)
-    player.getScheduler().runDelayed(BeltBags.plugin, { player.openInventory(inv.inv) }, null, 1)
   }
 }
