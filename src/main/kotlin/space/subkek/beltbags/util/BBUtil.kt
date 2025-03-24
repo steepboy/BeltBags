@@ -12,9 +12,9 @@ import java.util.function.Consumer
 object BBUtil {
   fun open(uuid: UUID, player: Player, type: Material, beforeOpen: Consumer<BeltBagInventory>?) {
     val inv: BeltBagInventory = BeltBags.plugin.data.getBeltBagInventory(uuid, type, player.location)
+    beforeOpen?.accept(inv)
     player.scheduler.runDelayed(BeltBags.plugin, {
       player.openInventory(inv.inv)
-      beforeOpen?.accept(inv)
 
       LegacyUtil.getArmorEquipSound(type)
         ?.let { sound -> player.playSound(player.location, sound, SoundCategory.PLAYERS, 1f, 1f) }

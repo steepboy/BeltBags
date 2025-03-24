@@ -16,7 +16,7 @@ class Database(private var path: String) {
     path = Path.of(BeltBags.plugin.dataFolder.absolutePath, path).toString()
 
     Class.forName("org.h2.Driver")
-    connection = DriverManager.getConnection("jdbc:h2:file:$path")
+    connection = DriverManager.getConnection("jdbc:h2:file:$path;DEFRAG_ALWAYS=true")
   }
 
   @Throws(SQLException::class)
