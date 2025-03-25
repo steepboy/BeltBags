@@ -17,7 +17,7 @@ object BBUtil {
       player.openInventory(inv.inv)
 
       LegacyUtil.getArmorEquipSound(type)
-        ?.let { sound -> player.playSound(player.location, sound, SoundCategory.PLAYERS, 1f, 1f) }
+        ?.let { sound -> player.playSound(player, sound, SoundCategory.PLAYERS, 1f, 1f) }
     }, null, 1)
   }
 
